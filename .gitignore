@@ -1,0 +1,15 @@
+# Build outputs
+build/
+*.obj
+*.pdb
+*.ilk
+*.exe
+
+# ImGui runtime state
+imgui.ini
+
+# Local tool settings
+.claude/
+
+# ImGui repo (vendored, has its own .git)
+imgui/

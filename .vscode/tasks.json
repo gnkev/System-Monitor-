@@ -1,0 +1,37 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Ensure Build Dir",
+            "type": "shell",
+            "command": "if not exist \"${workspaceFolder}\\build\" mkdir \"${workspaceFolder}\\build\"",
+            "options": {
+                "shell": {
+                    "executable": "cmd.exe",
+                    "args": ["/d", "/c"]
+                }
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Build System Monitor",
+            "type": "shell",
+            "command": "for /f \"usebackq delims=\" %p in (`\"C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\vswhere.exe\" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do call \"%p\\VC\\Auxiliary\\Build\\vcvars64.bat\" && cl.exe /Zi /EHsc /nologo /I \"${workspaceFolder}\\imgui\" /I \"${workspaceFolder}\\imgui\\backends\" \"/Fo${workspaceFolder}\\build\\\\\" \"/Fd${workspaceFolder}\\build\\SystemMonitor.pdb\" \"/Fe${workspaceFolder}\\build\\SystemMonitor.exe\" \"${workspaceFolder}\\main.cpp\" \"${workspaceFolder}\\lib\\imgui.cpp\" \"${workspaceFolder}\\lib\\imgui_draw.cpp\" \"${workspaceFolder}\\lib\\imgui_widgets.cpp\" \"${workspaceFolder}\\lib\\imgui_tables.cpp\" \"${workspaceFolder}\\lib\\imgui_impl_win32.cpp\" \"${workspaceFolder}\\lib\\imgui_impl_dx11.cpp\" /link d3d11.lib user32.lib gdi32.lib",
+            "dependsOn": ["Ensure Build Dir"],
+            "options": {
+                "shell": {
+                    "executable": "cmd.exe",
+                    "args": ["/d", "/c"]
+                }
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "detail": "Builds the ImGui System Monitor project."
+        }
+    ]
+}
