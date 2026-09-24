@@ -8,8 +8,9 @@ build/
 # ImGui runtime state
 imgui.ini
 
-# Local tool settings
+# Local tool settings & scripts
 .claude/
+build.bat
 
 # ImGui repo (vendored, has its own .git)
 imgui/
